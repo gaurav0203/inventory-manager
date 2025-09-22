@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Users</title>
-</head>
-<body>
+{% extends "base.html" %}
+    {% block content %}
     <h2>All Users</h2>
     <table border="1" cellpadding="8">
         <tr>
@@ -25,5 +21,4 @@
         </tr>
         {% endfor %}
     </table>
-</body>
-</html>
+{% endblock %}

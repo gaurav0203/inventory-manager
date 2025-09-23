@@ -1,31 +1,60 @@
 {% extends "base.html" %}
-    {% block content %}
-    <form action="/add_product" method="post">
-        <div>
-            <label for="p_name">Product Name:</label>
-            <input type="text" id="p_name" name="p_name" required>
-        </div>
-        <div>
-            <label for="sku">SKU:</label>
-            <input type="text" id="sku" name="sku" required>
-        </div>
-        <div>
-            <label for="category">Category:</label>
-            <input type="text" name="category" id="category" required>
-        </div>
-        <div>
-            <label for="buy_price">Purchase Price:</label>
-            <input type="number" name="buy_price" id="buy_price" required>
-        </div>
-        <div>
-            <label for="sell_price">Selling Price:</label>
-            <input type="number" name="sell_price" id="sell_price" required>
-        </div>
-        <div>
-            <label for="quantity">Quantity:</label>
-            <input type="number" name="quantity" id="quantity" required>
-        </div>
-        
-        <button type="submit">Add Product</button>
-    </form>
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">➕ Add New Product</h5>
+      </div>
+      <div class="card-body">
+        <form action="/add_product" method="post">
+          
+          <!-- Product Name -->
+          <div class="mb-3">
+            <label for="p_name" class="form-label">Product Name</label>
+            <input type="text" id="p_name" name="p_name" class="form-control" placeholder="Enter product name" required>
+          </div>
+
+          <!-- SKU -->
+          <div class="mb-3">
+            <label for="sku" class="form-label">SKU</label>
+            <input type="text" id="sku" name="sku" class="form-control" placeholder="Unique identifier (e.g., LAP123)" required>
+          </div>
+
+          <!-- Category -->
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <input type="text" id="category" name="category" class="form-control" placeholder="e.g., Electronics, Furniture" required>
+          </div>
+
+          <!-- Purchase Price -->
+          <div class="mb-3">
+            <label for="buy_price" class="form-label">Purchase Price</label>
+            <input type="number" id="buy_price" name="buy_price" class="form-control" min="0" step="0.01" required>
+          </div>
+
+          <!-- Selling Price -->
+          <div class="mb-3">
+            <label for="sell_price" class="form-label">Selling Price</label>
+            <input type="number" id="sell_price" name="sell_price" class="form-control" min="0" step="0.01" required>
+          </div>
+
+          <!-- Quantity -->
+          <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" id="quantity" name="quantity" class="form-control" min="0" required>
+          </div>
+
+          <!-- Submit -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success">✅ Add Product</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}

@@ -1,26 +1,67 @@
 {% extends "base.html" %}
-    {% block content %}
+{% block content %}
+
+<div class="d-flex justify-content-center align-items-center" style="height: 85vh;">
+  <div class="card shadow p-4" style="width: 400px;">
+    <h3 class="text-center mb-4">Register</h3>
     <form action="/register" method="post">
-        <div>
-            <label for="fullname">Full Name:</label>
-            <input type="text" id="fullname" name="fullname" required>
-        </div>
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required>
-        </div>
-        <div>
-            <label for="role">Role:</label>
-            <select name="role" id="role" required>
-                <option value="staff" selected>Staff</option>
-                <option value="manager">Manager</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
-        <button type="submit">Register</button>
+      
+      <!-- Full Name -->
+      <div class="mb-3">
+        <label for="fullname" class="form-label">Full Name</label>
+        <input 
+          type="text" 
+          id="fullname" 
+          name="fullname" 
+          class="form-control" 
+          placeholder="Enter full name" 
+          required>
+      </div>
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          class="form-control" 
+          placeholder="Choose a username" 
+          required>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          class="form-control" 
+          placeholder="Enter password" 
+          required>
+      </div>
+
+      <!-- Role -->
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select 
+          name="role" 
+          id="role" 
+          class="form-select" 
+          required>
+          <option value="staff" selected>Staff</option>
+          <option value="manager">Manager</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <div class="d-grid">
+        <button type="submit" class="btn btn-success">Register</button>
+      </div>
     </form>
+  </div>
+</div>
+
 {% endblock %}

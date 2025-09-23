@@ -1,24 +1,49 @@
 {% extends "base.html" %}
-    {% block content %}
-    <h2>All Users</h2>
-    <table border="1" cellpadding="8">
+{% block content %}
+
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">All Users</h2>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle">
+      <thead class="table-dark">
         <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Role</th>
-            <th>Action</th>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Role</th>
+          <th class="text-center">Action</th>
         </tr>
+      </thead>
+      <tbody>
         {% for user in users %}
         <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.role }}</td>
-            <td>
-                <form action="{{ url_for('routes.delete_user', user_id=user.id) }}" method="POST">
-                    <button type="submit" onclick="return confirm('Delete this user?');">Delete</button>
-                </form>
-            </td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>
+            <span class="badge 
+              {% if user.role == 'admin' %}
+                bg-danger
+              {% elif user.role == 'manager' %}
+                bg-primary
+              {% else %}
+                bg-secondary
+              {% endif %}
+            ">
+              {{ user.role | capitalize }}
+            </span>
+          </td>
+          <td class="text-center">
+            <form action="{{ url_for('routes.delete_user', user_id=user.id) }}" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this user?');">
+                Delete
+              </button>
+            </form>
+          </td>
         </tr>
         {% endfor %}
+      </tbody>
     </table>
+  </div>
+</div>
+
 {% endblock %}

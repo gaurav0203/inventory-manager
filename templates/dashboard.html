@@ -1,26 +1,73 @@
 {% extends "base.html" %}
-    {% block content %}
-    <p>Welcome, {{ current_user.username }}!</p>
-    
-    <div>Total Products: {{ total_products }}</div>
-    <div>Stock Value: ₹{{ stock_value }}</div>
-    <div>Potential Revenue: ₹{{ revenue }}</div>
-    <div>Transactions Today: {{ transactions_today }}</div>
+{% block content %}
 
-     <div>
-          {% if low_stock %}
-          <ul>
+<!-- Welcome -->
+<div class="mb-4">
+  <h3 class="fw-bold">Welcome, {{ current_user.username }} 👋</h3>
+</div>
+
+<!-- Summary Cards -->
+<div class="row text-center mb-4">
+  <div class="col-md-3 mb-3">
+    <div class="card shadow-sm border-primary">
+      <div class="card-body">
+        <h6 class="text-muted">Total Products</h6>
+        <h3 class="fw-bold">{{ total_products }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <div class="card shadow-sm border-success">
+      <div class="card-body">
+        <h6 class="text-muted">Stock Value</h6>
+        <h3 class="fw-bold text-success">₹{{ stock_value }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <div class="card shadow-sm border-warning">
+      <div class="card-body">
+        <h6 class="text-muted">Potential Revenue</h6>
+        <h3 class="fw-bold text-warning">₹{{ revenue }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <div class="card shadow-sm border-danger">
+      <div class="card-body">
+        <h6 class="text-muted">Transactions Today</h6>
+        <h3 class="fw-bold text-danger">{{ transactions_today }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Low Stock Alerts -->
+<div class="row">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header bg-danger text-white">
+        ⚠️ Low Stock Alerts
+      </div>
+      <div class="card-body">
+        {% if low_stock %}
+          <ul class="list-group">
             {% for product in low_stock %}
-              <li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
                 {{ product.name }} ({{ product.sku }})
-                <span>{{ product.quantity }}</span>
+                <span class="badge bg-danger">{{ product.quantity }}</span>
               </li>
             {% endfor %}
           </ul>
-          {% else %}
-          <p>All products have sufficient stock.</p>
-          {% endif %}
+        {% else %}
+          <div class="alert alert-success mb-0">✅ All products have sufficient stock.</div>
+        {% endif %}
+      </div>
     </div>
-
+  </div>
+</div>
 
 {% endblock %}

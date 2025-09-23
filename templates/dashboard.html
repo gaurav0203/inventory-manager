@@ -2,4 +2,25 @@
     {% block content %}
     <p>Welcome, {{ current_user.username }}!</p>
     <a href="{{ url_for('routes.logout') }}">Logout</a>
+    <div>Total Products: {{ total_products }}</div>
+    <div>Stock Value: ₹{{ stock_value }}</div>
+    <div>Potential Revenue: ₹{{ revenue }}</div>
+    <div>Transactions Today: {{ transactions_today }}</div>
+
+     <div>
+          {% if low_stock %}
+          <ul>
+            {% for product in low_stock %}
+              <li>
+                {{ product.name }} ({{ product.sku }})
+                <span>{{ product.quantity }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p>All products have sufficient stock.</p>
+          {% endif %}
+    </div>
+
+
 {% endblock %}

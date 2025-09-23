@@ -4,6 +4,7 @@ from extensions import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
 from utils import role_required
+from datetime import datetime
 
 routes_bp = Blueprint("routes", __name__, template_folder="templates")
 
@@ -68,7 +69,25 @@ def logout():
 @routes_bp.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html")
+    total_products = Product.query.count()
+    stock_value = db.session.query(db.func.sum(Product.purchase_price * Product.quantity)).scalar() or 0
+    revenue = db.session.query(db.func.sum(Product.selling_price * Product.quantity)).scalar() or 0
+    transactions_today = Transaction.query.filter(
+        db.func.date(Transaction.timestamp) == datetime.now().date()
+    ).count()
+
+    recent_transactions = Transaction.query.order_by(Transaction.timestamp.desc()).limit(5).all()
+
+    low_stock = Product.query.filter(Product.quantity < 5).all()
+
+    return render_template("dashboard.html",
+        total_products=total_products,
+        stock_value=stock_value,
+        revenue=revenue,
+        transactions_today=transactions_today,
+        recent_transactions=recent_transactions,
+        low_stock=low_stock
+    )
 
 @routes_bp.route("/getusers")
 @login_required
